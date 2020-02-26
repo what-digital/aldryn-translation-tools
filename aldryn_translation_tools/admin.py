@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.forms import widgets
 from django.utils.encoding import force_text
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 from cms.utils.i18n import get_current_language
@@ -122,12 +123,12 @@ class AllTranslationsMixin(object):
                     model_name=obj.__class__.__name__.lower(),
                 ), args=(obj.id, )
             )
-            link = '<a class="{classes}" href="{url}?language={code}" title="{title}">{code}</a>'.format(
+            link = mark_safe('<a class="{classes}" href="{url}?language={code}" title="{title}">{code}</a>'.format(
                 classes=' '.join(classes),
                 url=change_form_url,
                 code=code,
                 title=title,
-            )
+            ))
             langs.append(link)
         return ''.join(langs)
     all_translations.short_description = 'Translations'
