@@ -123,14 +123,14 @@ class AllTranslationsMixin(object):
                     model_name=obj.__class__.__name__.lower(),
                 ), args=(obj.id, )
             )
-            link = mark_safe('<a class="{classes}" href="{url}?language={code}" title="{title}">{code}</a>'.format(
+            link = '<a class="{classes}" href="{url}?language={code}" title="{title}">{code}</a>'.format(
                 classes=' '.join(classes),
                 url=change_form_url,
                 code=code,
                 title=title,
-            ))
+            )
             langs.append(link)
-        return ''.join(langs)
+        return mark_safe(''.join(langs))
     all_translations.short_description = 'Translations'
     all_translations.allow_tags = True
 
